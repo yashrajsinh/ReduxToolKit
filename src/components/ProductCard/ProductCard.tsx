@@ -1,5 +1,4 @@
-// ProductCard.js
-
+// ProductCard.tsx
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
@@ -24,14 +23,31 @@ const ProductCard = ({ item }: any) => {
             {item.description}
           </Text>
 
-          {/* Price + Button */}
-
+          {/* Bottom Row: Price + Add to Cart + Quantity Selector */}
           <View style={styles.bottom}>
+            {/* Price */}
             <Text style={styles.price}>CAD ${item.price}</Text>
 
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Add to Cart</Text>
-            </TouchableOpacity>
+            {/* Right side: Add to Cart + Quantity */}
+            <View style={styles.rightSide}>
+              {/* Add to Cart button */}
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Add to Cart</Text>
+              </TouchableOpacity>
+
+              {/* Quantity Selector UI */}
+              <View style={styles.qtyContainer}>
+                <TouchableOpacity style={styles.qtyBtn}>
+                  <Text style={styles.qtyText}>-</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.qtyNumber}>0</Text>
+
+                <TouchableOpacity style={styles.qtyBtn}>
+                  <Text style={styles.qtyText}>+</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -42,7 +58,6 @@ const ProductCard = ({ item }: any) => {
 export default ProductCard;
 
 const styles = StyleSheet.create({
-  // wrapper fixes Android shadow clipping
   wrapper: {
     marginHorizontal: 12,
     marginVertical: 8,
@@ -52,15 +67,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderRadius: 14,
-    padding: 14,
-
-    // iOS shadow
+    padding: 15,
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 5 },
-
-    // Android shadow
     elevation: 6,
   },
 
@@ -68,7 +79,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     marginRight: 14,
-    borderRadius: 3,
+    borderRadius: 8,
   },
 
   content: {
@@ -89,24 +100,63 @@ const styles = StyleSheet.create({
 
   bottom: {
     marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap', // allows wrapping on small screens
   },
 
   price: {
     fontSize: 20,
     fontWeight: '800',
-    marginBottom: 8,
+    color: '#111',
+  },
+
+  rightSide: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexShrink: 1, // shrink if space is limited
   },
 
   button: {
     backgroundColor: '#000',
     paddingVertical: 10,
+    paddingHorizontal: 12,
     borderRadius: 8,
-    alignItems: 'center',
+    marginRight: 15,
+    flexShrink: 1, // button can shrink
   },
 
   buttonText: {
     color: '#fff',
     fontSize: 13,
     fontWeight: '600',
+  },
+
+  qtyContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
+    borderRadius: 8,
+    overflow: 'hidden',
+    flexShrink: 1, // shrink if needed
+  },
+
+  qtyBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    backgroundColor: '#ddd',
+  },
+
+  qtyText: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+
+  qtyNumber: {
+    paddingHorizontal: 12,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#111',
   },
 });
