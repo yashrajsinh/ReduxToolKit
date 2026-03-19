@@ -15,13 +15,13 @@ const Stack = createNativeStackNavigator();
 //Screens
 import ProductScreen from './src/screens/ProductsScreen';
 
-//Store
-import { ProductStore } from './src/store/ProductStore';
 import { Provider } from 'react-redux';
+//Store
+import { store } from './src/store/ProductStore';
 
 function App() {
   return (
-    <Provider store={ProductStore}>
+    <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
