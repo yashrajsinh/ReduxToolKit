@@ -57,19 +57,6 @@ const ProductCard = ({ item }: any) => {
               >
                 <Text style={styles.buttonText}>Add to Cart</Text>
               </TouchableOpacity>
-
-              {/* Quantity Selector UI */}
-              <View style={styles.qtyContainer}>
-                <TouchableOpacity style={styles.qtyBtn}>
-                  <Text style={styles.qtyText}>-</Text>
-                </TouchableOpacity>
-
-                <Text style={styles.qtyNumber}>0</Text>
-
-                <TouchableOpacity style={styles.qtyBtn}>
-                  <Text style={styles.qtyText}>+</Text>
-                </TouchableOpacity>
-              </View>
             </View>
           </View>
         </View>
