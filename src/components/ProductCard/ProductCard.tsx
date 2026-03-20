@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 
 //Dispatch
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 //Redux Slice
 import { addProductsToCart } from '../../redux/ProductCartSlice';
 
 const ProductCard = ({ item }: any) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector(state => state.cart);
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.card}>
@@ -37,40 +37,19 @@ const ProductCard = ({ item }: any) => {
             {item.description}
           </Text>
 
-          {/* Bottom Row: Price + Add to Cart + Quantity Selector */}
+          {/* Bottom Section */}
           <View style={styles.bottom}>
-            {/* Price */}
             <Text style={styles.price}>CAD ${item.price}</Text>
 
-            {/* Right side: Add to Cart + Quantity */}
-            <View style={styles.rightSide}>
-              {/* Add to Cart button */}
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => {
-                  dispatch(addProductsToCart(item));
-                  ToastAndroid.show(
-                    `${item.name} added to cart`,
-                    ToastAndroid.LONG,
-                  );
-                }}
-              >
-                <Text style={styles.buttonText}>Add to Cart</Text>
-              </TouchableOpacity>
-
-              {/* Quantity Selector UI */}
-              <View style={styles.qtyContainer}>
-                <TouchableOpacity style={styles.qtyBtn}>
-                  <Text style={styles.qtyText}>-</Text>
-                </TouchableOpacity>
-
-                <Text style={styles.qtyNumber}>0</Text>
-
-                <TouchableOpacity style={styles.qtyBtn}>
-                  <Text style={styles.qtyText}>+</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={styles.button}
+              onPress={() => {
+                dispatch(addProductsToCart(item));
+              }}
+            >
+              <Text style={styles.buttonText}>Add to Cart</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -79,7 +58,6 @@ const ProductCard = ({ item }: any) => {
 };
 
 export default ProductCard;
-
 const styles = StyleSheet.create({
   wrapper: {
     marginHorizontal: 12,
@@ -89,24 +67,26 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    borderRadius: 14,
-    padding: 15,
+    borderRadius: 16,
+    padding: 12,
+
     shadowColor: '#000',
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.08,
     shadowRadius: 8,
-    shadowOffset: { width: 0, height: 5 },
-    elevation: 6,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
   },
 
   image: {
-    width: 120,
-    height: 120,
-    marginRight: 14,
-    borderRadius: 8,
+    width: 110,
+    height: 110,
+    borderRadius: 12,
+    marginRight: 12,
   },
 
   content: {
     flex: 1,
+    justifyContent: 'space-between',
   },
 
   name: {
@@ -117,69 +97,32 @@ const styles = StyleSheet.create({
 
   desc: {
     fontSize: 12,
-    color: '#777',
-    marginTop: 4,
+    color: '#666',
+    marginTop: 6,
+    lineHeight: 16,
   },
 
   bottom: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap', // allows wrapping on small screens
+    marginTop: 12,
   },
 
   price: {
-    fontSize: 20,
-    fontWeight: '800',
+    fontSize: 18,
+    fontWeight: '700',
     color: '#111',
   },
 
-  rightSide: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexShrink: 1, // shrink if space is limited
-  },
-
   button: {
+    marginTop: 10,
     backgroundColor: '#000',
     paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    marginRight: 15,
-    flexShrink: 1, // button can shrink
+    borderRadius: 10,
+    alignItems: 'center',
   },
 
   buttonText: {
     color: '#fff',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
-  },
-
-  qtyContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f2f2f2',
-    borderRadius: 8,
-    overflow: 'hidden',
-    flexShrink: 1, // shrink if needed
-  },
-
-  qtyBtn: {
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    backgroundColor: '#ddd',
-  },
-
-  qtyText: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-
-  qtyNumber: {
-    paddingHorizontal: 12,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#111',
   },
 });
