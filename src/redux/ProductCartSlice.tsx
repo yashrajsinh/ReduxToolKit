@@ -4,11 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = [];
 
 // Create the slice
-const productSlice = createSlice({
-  name: 'product', // name of this slice
+const ProductCartSlice = createSlice({
+  name: 'cart', // name of this slice
   initialState,
   reducers: {
-    addProduct(state, action) {
+    addProductsToCart(state, action) {
       // Add new product to state
       state.push(action.payload);
     },
@@ -16,7 +16,7 @@ const productSlice = createSlice({
 });
 
 // Export action to use in components
-export const { addProduct } = productSlice.actions;
+export const { addProductsToCart } = ProductCartSlice.actions;
 
 // Export reducer to add to store
-export default productSlice.reducer;
+export default ProductCartSlice.reducer;

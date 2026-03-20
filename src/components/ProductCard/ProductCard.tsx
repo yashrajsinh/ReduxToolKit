@@ -1,8 +1,22 @@
 // ProductCard.tsx
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
+
+//Dispatch
+import { useDispatch, useSelector } from 'react-redux';
+//Redux Slice
+import { addProductsToCart } from '../../redux/ProductCartSlice';
 
 const ProductCard = ({ item }: any) => {
+  const dispatch = useDispatch();
+  const cartItem = useSelector(state => state.cart);
   return (
     <View style={styles.wrapper}>
       <View style={styles.card}>
@@ -31,7 +45,16 @@ const ProductCard = ({ item }: any) => {
             {/* Right side: Add to Cart + Quantity */}
             <View style={styles.rightSide}>
               {/* Add to Cart button */}
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  dispatch(addProductsToCart(item));
+                  ToastAndroid.show(
+                    `${item.name} added to cart`,
+                    ToastAndroid.LONG,
+                  );
+                }}
+              >
                 <Text style={styles.buttonText}>Add to Cart</Text>
               </TouchableOpacity>
 

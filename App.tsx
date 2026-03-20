@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator();
 
 //Screens
 import ProductScreen from './src/screens/ProductsScreen';
+import UserCart from './src/screens/UserCart';
 
 import { Provider } from 'react-redux';
 //Store
@@ -29,6 +30,7 @@ function App() {
             component={ProductScreen}
             options={{ title: 'Snekers Heaven 👟' }}
           />
+          <Stack.Screen name="Cart" component={UserCart} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
